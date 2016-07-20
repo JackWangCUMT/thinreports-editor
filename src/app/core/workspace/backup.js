@@ -85,8 +85,9 @@ thin.core.Workspace.Backup.set_ = function(tlfs, callbacks) {
     // complete
     var new_backup = {};
     goog.object.set(new_backup, thin.core.Workspace.Backup.KEY, tlfs);
-    thin.platform.callNativeFunction('chrome.storage.local.set',
-      new_backup, callbacks.complete);
+    // thin.platform.callNativeFunction('chrome.storage.local.set',
+    //   new_backup, callbacks.complete);
+    callbacks.complete();
   });
 };
 
@@ -100,9 +101,10 @@ thin.core.Workspace.Backup.get_ = function(callback_fn, opt_obj) {
   var key = thin.core.Workspace.Backup.KEY;
   var scope = opt_obj || goog.global;
 
-  thin.platform.callNativeFunction('chrome.storage.local.get', [key], function(storage) {
-    callback_fn.call(scope, (storage[key] || {}));
-  });
+  callback_fn.call(scope, {})
+  // thin.platform.callNativeFunction('chrome.storage.local.get', [key], function(storage) {
+  //   callback_fn.call(scope, (storage[key] || {}));
+  // });
 };
 
 
